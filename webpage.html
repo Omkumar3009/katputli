@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Life of a Rajasthani Puppet (Kathputli)</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Rye&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    :root {
+      --rajasthan-orange: #d9480f;
+      --sand-bg: #fff8f0;
+      --deep-brown: #4b2e0f;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--sand-bg);
+      color: var(--deep-brown);
+      margin: 0;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+    }
+
+    /* --- START OVERLAY UI --- */
+    #start-overlay {
+      position: fixed;
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
+      background: linear-gradient(135deg, #4b2e0f 0%, #2c1a08 100%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      transition: opacity 0.8s ease;
+    }
+    
+    #start-overlay h1 {
+      font-family: 'Rye', serif;
+      font-size: 3.5rem;
+      color: #dbad6d;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .start-btn {
+      font-family: 'Poppins', sans-serif;
+      background-color: #d9480f;
+      color: white;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(217, 72, 15, 0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(217, 72, 15, 0.8);
+      background-color: #ff5e1f;
+    }
+
+    header {
+      background: linear-gradient(to right, #d9480f, #b3360a);
+      padding: 2rem 1rem;
+      text-align: center;
+      color: white;
+      font-family: 'Rye', serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.05rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      user-select: none;
+    }
+
+    h5.card-title {
+      color: var(--rajasthan-orange);
+      font-weight: 700;
+      font-family: 'Rye', serif;
+    }
+
+    p.card-text {
+      font-style: italic;
+      color: #6a4a12;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .expandable-content {
+      display: none;
+      margin-top: 0.8rem;
+      font-style: normal;
+      color: #442b0e;
+      background: #f7e8ce;
+      padding: 0.8rem;
+      border-radius: 8px;
+      border-left: 4px solid #db7a2f;
+    }
+
+    .card-img-top {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      background-color: #f0e8db;
+      border-bottom: 3px solid #dbad6d;
+      animation: floatPuppet 5s ease-in-out infinite;
+    }
+
+    @keyframes floatPuppet {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .play-audio-btn {
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .quiz-section {
+      margin-top: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid #dbad6d;
+      box-shadow: 0 10px 25px rgba(219, 173, 109, 0.3);
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--rajasthan-orange);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: #994c00;
+      font-weight: 600;
+    }
+
+    .share-icons {
+      margin-top: 10px;
+      font-size: 1.3rem;
+      color: var(--rajasthan-orange);
+      cursor: pointer;
+      gap: 15px;
+    }
+    .share-icons i { margin-right: 10px; transition: color 0.2s; }
+    .share-icons i:hover { color: #833d00; }
+  </style>
+</head>
+<body>
+
+<div id="start-overlay">
+  <h1>Life of a Kathputli</h1>
+  <p class="mb-4 fs-5" style="opacity: 0.9;">A Journey into Rajasthani Folk Culture</p>
+  <button id="start-btn" class="start-btn">Enter Puppet Show</button>
+</div>
+
+<header>Stories from a Kathputli</header>
+
+<main class="container mb-5">
+
+  <article class="card shadow-sm mb-5">
+    <img src="1st.jpeg" class="card-img-top" alt="Introduction" />
+    <div class="card-body">
+      <h5 class="card-title">1. Introduction</h5>
+      <p class="card-text">"Hello! I am Kathputli — a traditional Rajasthani puppet who tells stories of our land."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        I come alive on puppet stages in vibrant Rajasthani fairs, spinning tales that bring joy and wisdom to all who watch.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio1" src="panel 1.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="2nd.jpeg" class="card-img-top" alt="Meet the Puppet" />
+    <div class="card-body">
+      <h5 class="card-title">2. Meet the Puppet</h5>
+      <p class="card-text">"For centuries, I’ve been part of folk tales and legends, brought alive by skilled puppeteers."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        Every string and vibrant costume reflects Rajasthani culture and the intricate craft of our puppeteers.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio2" src="panel 2.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="3rd.jpeg" class="card-img-top" alt="Folk Tale" />
+    <div class="card-body">
+      <h5 class="card-title">3. Folk Tale Narration</h5>
+      <p class="card-text">"Listen closely to the tale of bravery and hope that my shows bring to every festive gathering."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        Stories like "The Brave Desert King" teach lessons of courage and unity delivered through puppet performances.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio3" src="panel 3.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="4th.jpeg" class="card-img-top" alt="Behind Scenes" />
+    <div class="card-body">
+      <h5 class="card-title">4. Behind The Scenes</h5>
+      <p class="card-text">"Behind me is the puppeteer, skilled in bringing life to my movements and voice."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        Our puppeteers dedicate decades learning the art, infusing emotion and culture into every show.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio4" src="panel 4.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="5th.jpeg" class="card-img-top" alt="Social Message" />
+    <div class="card-body">
+      <h5 class="card-title">5. Social Messaging</h5>
+      <p class="card-text">"Our stories often carry messages about respect, equality, and social values."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        Puppet shows remind communities about respect, fairness, and social harmony while entertaining.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio5" src="panel 5.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="6th.jpeg" class="card-img-top" alt="Modern Challenges" />
+    <div class="card-body">
+      <h5 class="card-title">6. Modern Challenges</h5>
+      <p class="card-text">"But now, modern technology and changing tastes make my art struggle to find its place."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        The rise of television and smartphones makes it harder to attract young audiences to puppet shows.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio6" src="panel 6.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="7th.jpeg" class="card-img-top" alt="Hope" />
+    <div class="card-body">
+      <h5 class="card-title">7. Hope for the Future</h5>
+      <p class="card-text">"Yet, I remain hopeful. New generations still come to listen, keeping alive our heritage."</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        Cultural festivals and schools help popularize puppetry among young learners and visitors.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio7" src="panel 7.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <article class="card shadow-sm mb-5">
+    <img src="8th.jpeg" class="card-img-top" alt="Thank You" />
+    <div class="card-body">
+      <h5 class="card-title">8. Thank You</h5>
+      <p class="card-text">"Thank you for joining me on this journey through Rajasthani folk culture. धन्यवाद"</p>
+      <button class="btn btn-outline-warning btn-sm toggle-btn">Read More</button>
+      <div class="expandable-content">
+        Support local artists and cherish our culture by sharing these stories and attending live shows when possible.
+      </div>
+      <hr class="text-secondary opacity-25">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-sm btn-outline-danger play-audio-btn" aria-label="Play narration"><i class="fas fa-play"></i> Play Narration</button>
+        <div class="share-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fas fa-link"></i>
+        </div>
+      </div>
+      <audio id="audio8" src="panel 8.wav" preload="none"></audio>
+    </div>
+  </article>
+
+  <section class="quiz-section">
+    <h4 class="text-center mb-4" style="font-family: 'Rye', serif; color: #d9480f;">Test Your Knowledge</h4>
+    <form id="quizForm">
+      <div class="mb-3">
+        <p class="quiz-question">1. What is Kathputli?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q1" value="wrong1" required /> A type of folk dance</label>
+          <label><input type="radio" name="q1" value="correct" /> Traditional Rajasthani puppet</label>
+          <label><input type="radio" name="q1" value="wrong2" /> A musical instrument</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <p class="quiz-question">2. Puppetry stories often carry messages about:</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2" value="correct" required /> Social values and morals</label>
+          <label><input type="radio" name="q2" value="wrong1" /> Cooking recipes</label>
+          <label><input type="radio" name="q2" value="wrong2" /> Travel guides</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-warning w-100 fw-bold">Submit Answers</button>
+      <div id="quizResult" class="mt-3 text-center fw-bold"></div>
+    </form>
+  </section>
+
+</main>
+
+<footer>&copy; 2025 Life of a Rajasthani Puppet</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- START OVERLAY LOGIC ---
+    const startOverlay = document.getElementById('start-overlay');
+    const startBtn = document.getElementById('start-btn');
+
+    startBtn.addEventListener('click', () => {
+      startOverlay.style.opacity = '0';
+      setTimeout(() => {
+        startOverlay.style.display = 'none';
+      }, 800);
+    });
+
+    // --- EXPANDABLE CONTENT ---
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+          button.textContent = 'Read More';
+        } else {
+          content.style.display = 'block';
+          button.textContent = 'Show Less';
+        }
+      });
+    });
+
+    // --- AUDIO CONTROL LOGIC ---
+    const narrationAudios = document.querySelectorAll('audio[id^="audio"]');
+    const playButtons = document.querySelectorAll('.play-audio-btn');
+
+    playButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        const currentAudio = narrationAudios[idx];
+
+        // Stop any other narrations that might be playing
+        narrationAudios.forEach((audio, i) => {
+           if(i !== idx) {
+             audio.pause();
+             audio.currentTime = 0;
+             // Reset other buttons
+             playButtons[i].innerHTML = '<i class="fas fa-play"></i> Play Narration';
+             playButtons[i].classList.remove('btn-danger');
+             playButtons[i].classList.add('btn-outline-danger');
+           }
+        });
+
+        // Toggle current audio
+        if (currentAudio.paused) {
+          // Try to play, catch errors if file not found
+          currentAudio.play().catch(error => {
+             alert("Error: Could not play audio. \nMake sure your file is named: " + currentAudio.getAttribute('src'));
+             console.error(error);
+          });
+          
+          btn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+          btn.classList.add('btn-danger');
+          btn.classList.remove('btn-outline-danger');
+        } else {
+          currentAudio.pause();
+          btn.innerHTML = '<i class="fas fa-play"></i> Play Narration';
+          btn.classList.remove('btn-danger');
+          btn.classList.add('btn-outline-danger');
+        }
+
+        // When narration ends
+        currentAudio.onended = () => {
+          btn.innerHTML = '<i class="fas fa-play"></i> Play Narration';
+          btn.classList.remove('btn-danger');
+          btn.classList.add('btn-outline-danger');
+        };
+      });
+    });
+
+    // --- QUIZ LOGIC ---
+    const quizForm = document.getElementById('quizForm');
+    const quizResult = document.getElementById('quizResult');
+    quizForm.addEventListener('submit', e => {
+      e.preventDefault();
+      let score = 0;
+      const answers = { q1: 'correct', q2: 'correct' };
+      
+      for (const [question, correctAnswer] of Object.entries(answers)) {
+        const userAnswer = quizForm.elements[question].value;
+        if (userAnswer === correctAnswer) score++;
+      }
+      
+      if(score === 2) {
+          quizResult.innerHTML = '<span class="text-success">Great job! 2/2 Correct!</span>';
+      } else {
+          quizResult.innerHTML = `<span class="text-warning">You scored ${score}/2. Try again!</span>`;
+      }
+    });
+
+    // --- SHARE ICONS ---
+    document.querySelectorAll('.share-icons i').forEach(icon => {
+      icon.addEventListener('click', () => {
+        let shareUrl = window.location.href;
+        if (icon.classList.contains('fa-link')) {
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            alert('Link copied to clipboard!');
+          });
+        } else {
+            alert('Sharing feature simulated!');
+        }
+      });
+    });
+
+  });
+</script>
+
+</body>
+</html>
